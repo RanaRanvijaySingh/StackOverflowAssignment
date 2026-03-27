@@ -1,15 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.example.stackoverflow"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.stackoverflow"
@@ -55,4 +53,19 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 }
