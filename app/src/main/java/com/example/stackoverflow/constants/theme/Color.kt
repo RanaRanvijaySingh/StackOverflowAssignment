@@ -1,4 +1,4 @@
-package com.example.stackoverflow.ui.theme
+package com.example.stackoverflow.constants.theme
 
 import androidx.compose.ui.graphics.Color
 

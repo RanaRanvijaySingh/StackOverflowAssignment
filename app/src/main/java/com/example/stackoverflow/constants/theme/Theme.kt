@@ -1,6 +1,5 @@
-package com.example.stackoverflow.ui.theme
+package com.example.stackoverflow.constants.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
