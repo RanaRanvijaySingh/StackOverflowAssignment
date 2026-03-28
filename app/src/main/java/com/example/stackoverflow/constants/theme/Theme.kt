@@ -18,6 +18,7 @@ private val DarkColorScheme = darkColorScheme(
     background = Black,
     onBackground = White,
     surface = Black,
+    onSurfaceVariant = Gray,
     onSurface = White,
     outline = Gray,
     error = Red,
