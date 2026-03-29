@@ -36,7 +36,7 @@ fun ProfilePicView(
     var showInitials by remember { mutableStateOf(imageUrl.isNullOrBlank()) }
     if (!showInitials) {
         Box(
-            modifier = Modifier.size(imageSize),
+            modifier = modifier.size(imageSize),
             contentAlignment = Alignment.Center
         ) {
 
@@ -56,14 +56,14 @@ fun ProfilePicView(
             )
         }
     } else {
-        ProfileInitialsView(name)
+        ProfileInitialsView(name, modifier)
     }
 }
 
 @Composable
-fun ProfileInitialsView(name: String) {
+fun ProfileInitialsView(name: String, modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .size(imageSize)
             .clip(CircleShape)
             .background(color = OrangeLight),

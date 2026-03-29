@@ -14,6 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.stackoverflow.constants.follow
 import com.example.stackoverflow.constants.following
 import com.example.stackoverflow.constants.retry
+import com.example.stackoverflow.constants.theme.Orange
+import com.example.stackoverflow.constants.theme.OrangeDark
+import com.example.stackoverflow.constants.theme.OrangeLight
 import com.example.stackoverflow.constants.theme.StackOverflowTheme
 
 @Composable
@@ -34,9 +37,9 @@ fun FollowButtonView(onClick: () -> Unit, isFollowing: Boolean, modifier: Modifi
     )
     val contentColor by animateColorAsState(
         targetValue = if (isFollowing)
-            MaterialTheme.colorScheme.onPrimaryContainer
+            MaterialTheme.colorScheme.onPrimary
         else
-            MaterialTheme.colorScheme.onSecondaryContainer,
+            MaterialTheme.colorScheme.onSecondary,
         label = "contentColor"
     )
     TextButton(

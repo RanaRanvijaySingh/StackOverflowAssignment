@@ -1,6 +1,5 @@
 package com.example.stackoverflow.presentation.ui
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,13 +12,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.stackoverflow.constants.repo
 import com.example.stackoverflow.constants.theme.StackOverflowTheme
+import com.example.stackoverflow.domain.models.User
+import com.example.stackoverflow.presentation.ui.core.FollowButtonView
 import com.example.stackoverflow.presentation.ui.core.ProfilePicView
 import com.example.stackoverflow.presentation.ui.core.TextViewPrimary
 import com.example.stackoverflow.presentation.ui.core.TextViewSecondary
 
 @Composable
-fun UserListItemView() {
+fun UserListItemView(user: User, onFollowClick: (User) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxSize()
@@ -28,15 +30,20 @@ fun UserListItemView() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         ProfilePicView(
-            imageUrl = "https://www.gravatar.com/avatar/6d8ebb117e8d83d74ea95fbdd0f87e13?s=256&d=identicon&r=PG",
-            name = "Rana Ranvijay Singh", modifier = Modifier
+            imageUrl = user.imageUrl,
+            name = user.name,
+            modifier = Modifier
         )
         Spacer(modifier = Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {
-            TextViewPrimary("Rana Ranvijay Singh")
-            TextViewSecondary("8606 repo")
+            TextViewPrimary(user.name)
+            TextViewSecondary("${user.repo} $repo")
         }
-
+        FollowButtonView(
+            onClick = { onFollowClick(user) },
+            modifier = Modifier,
+            isFollowing = user.isFollowing
+        )
     }
 }
 
@@ -44,6 +51,13 @@ fun UserListItemView() {
 @Composable
 fun UserListItemViewPreview() {
     StackOverflowTheme {
-        UserListItemView()
+        UserListItemView(
+            user = User(
+                1,
+                "Rana Ranvijay Singh",
+                null, false, 100
+            ),
+            onFollowClick = { }
+        )
     }
 }
