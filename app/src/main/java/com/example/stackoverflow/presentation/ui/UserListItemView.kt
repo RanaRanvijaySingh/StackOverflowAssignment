@@ -17,7 +17,6 @@ import com.example.stackoverflow.constants.theme.StackOverflowTheme
 import com.example.stackoverflow.presentation.ui.core.ProfilePicView
 import com.example.stackoverflow.presentation.ui.core.TextViewPrimary
 import com.example.stackoverflow.presentation.ui.core.TextViewSecondary
-import java.nio.file.StandardWatchEventKinds
 
 @Composable
 fun UserListItemView() {
@@ -37,6 +36,7 @@ fun UserListItemView() {
             TextViewPrimary("Rana Ranvijay Singh")
             TextViewSecondary("8606 repo")
         }
+
     }
 }
 
