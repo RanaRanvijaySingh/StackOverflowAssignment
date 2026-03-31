@@ -12,7 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.stackoverflow.constants.theme.StackOverflowTheme
+import com.example.stackoverflow.domain.models.User
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +36,15 @@ fun HomePageView(modifier: Modifier) {
 
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+val users = listOf<User>(
+    User(1, "Rana Singh", "", false, 100),
+    User(2, "Ranvijay Singh", "", false, 101)
+)
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun GreetingPreview() {
+fun HomePageViewPreview() {
     StackOverflowTheme {
-        Greeting("Android")
+        UserListView(users, {})
     }
 }
