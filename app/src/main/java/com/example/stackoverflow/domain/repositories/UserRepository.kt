@@ -1,4 +1,7 @@
 package com.example.stackoverflow.domain.repositories
 
-class UserRepository {
+import com.example.stackoverflow.domain.models.User
+
+interface UserRepository {
+    suspend fun getUsers(): List<User>
 }
