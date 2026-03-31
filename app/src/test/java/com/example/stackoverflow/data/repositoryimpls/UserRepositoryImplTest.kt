@@ -1,6 +1,6 @@
 package com.example.stackoverflow.data.repositoryimpls
 
-import FakeApiService
+import com.example.stackoverflow.FakeApiService
 import com.example.stackoverflow.data.remote.dtos.UsersResponseDto
 import com.example.stackoverflow.TestHelper
 import kotlinx.coroutines.runBlocking
