@@ -52,5 +52,5 @@ object NetworkModule {
     fun provideStackOverflowApiService(retrofit: Retrofit): StackOverflowApiService =
         retrofit.create(StackOverflowApiService::class.java)
 
-    private const val BASE_URL = "http://api.stackexchange.com/"
+    private const val BASE_URL = "https://api.stackexchange.com/"
 }
