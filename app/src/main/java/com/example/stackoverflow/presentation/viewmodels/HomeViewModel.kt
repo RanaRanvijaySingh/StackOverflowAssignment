@@ -19,10 +19,14 @@ class HomeViewModel @Inject constructor(
     val userUiState: StateFlow<UserUiState> = _userUiState
 
     init {
-        getUsers()
+        loadUsers()
     }
 
-    private fun getUsers() {
+    fun retryLoadUsers() {
+        loadUsers()
+    }
+
+    private fun loadUsers() {
         viewModelScope.launch {
             _userUiState.value = UserUiState.Loading
             try {
