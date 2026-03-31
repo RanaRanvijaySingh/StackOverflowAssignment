@@ -20,14 +20,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             StackOverflowTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    HomePageView(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
+
+}
+
+@Composable
+fun HomePageView(modifier: Modifier) {
+
 }
 
 @Composable
