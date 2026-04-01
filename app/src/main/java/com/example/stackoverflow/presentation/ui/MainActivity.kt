@@ -68,7 +68,11 @@ fun HomePageView(
                 onRetry = { homeViewModel.retryLoadUsers() }
             )
 
-        is UserUiState.Success -> UserListView(users = state.users, onFollowClick = {})
+        is UserUiState.Success ->
+            UserListView(
+                users = state.users,
+                onFollowClick = { user -> homeViewModel.onFollowClick(user) }
+            )
     }
 }
 

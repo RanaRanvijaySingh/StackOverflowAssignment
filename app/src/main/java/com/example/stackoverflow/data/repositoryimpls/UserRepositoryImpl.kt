@@ -14,7 +14,10 @@ class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao
 ) : UserRepository {
 
-    override suspend fun getUsers(): List<User> {
+    override suspend fun getStoredUsers(): List<User> =
+        userDao.getUsers().map { entity -> entity.toUiModel() }
+
+    override suspend fun syncUsersFromRemote(): List<User> {
         val response = apiService.getUsers()
         if (response.isSuccessful) {
             val items = response.body()?.items.orEmpty()
@@ -31,5 +34,9 @@ class UserRepositoryImpl @Inject constructor(
             }
         }
         return userDao.getUsers().map { entity -> entity.toUiModel() }
+    }
+
+    override suspend fun setUserFollowing(userId: Int, isFollowing: Boolean) {
+        userDao.updateFollowing(userId, isFollowing)
     }
 }

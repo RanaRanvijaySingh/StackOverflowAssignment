@@ -4,9 +4,9 @@ import com.example.stackoverflow.domain.models.User
 import com.example.stackoverflow.domain.repositories.UserRepository
 import javax.inject.Inject
 
-class GetUsersUseCase @Inject constructor(
+class GetStoredUsersUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
 
-    suspend operator fun invoke(): List<User> = userRepository.syncUsersFromRemote()
+    suspend operator fun invoke(): List<User> = userRepository.getStoredUsers()
 }

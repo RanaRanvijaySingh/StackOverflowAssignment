@@ -29,4 +29,12 @@ class FakeUserDao : UserDao {
     override suspend fun deleteAll() {
         items.clear()
     }
+
+    override suspend fun updateFollowing(userId: Int, isFollowing: Boolean) {
+        val index = items.indexOfFirst { it.id == userId }
+        if (index >= 0) {
+            val old = items[index]
+            items[index] = old.copy(isFollowing = isFollowing)
+        }
+    }
 }

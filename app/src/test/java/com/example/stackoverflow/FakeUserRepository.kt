@@ -5,11 +5,21 @@ import com.example.stackoverflow.domain.repositories.UserRepository
 
 class FakeUserRepository : UserRepository {
 
-    var usersResult: List<User> = emptyList()
-    var errorToThrow: Throwable? = null
+    var storedUsers: List<User> = emptyList()
+    var syncResult: List<User> = emptyList()
+    var errorOnSync: Throwable? = null
 
-    override suspend fun getUsers(): List<User> {
-        errorToThrow?.let { throw it }
-        return usersResult
+    override suspend fun getStoredUsers(): List<User> = storedUsers
+
+    override suspend fun syncUsersFromRemote(): List<User> {
+        errorOnSync?.let { throw it }
+        storedUsers = syncResult
+        return storedUsers
+    }
+
+    override suspend fun setUserFollowing(userId: Int, isFollowing: Boolean) {
+        storedUsers = storedUsers.map { user ->
+            if (user.id == userId) user.copy(isFollowing = isFollowing) else user
+        }
     }
 }

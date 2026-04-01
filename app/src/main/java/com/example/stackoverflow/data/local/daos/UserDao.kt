@@ -24,4 +24,7 @@ interface UserDao {
 
     @Query("DELETE FROM users")
     suspend fun deleteAll()
+
+    @Query("UPDATE users SET isFollowing = :isFollowing WHERE id = :userId")
+    suspend fun updateFollowing(userId: Int, isFollowing: Boolean)
 }
