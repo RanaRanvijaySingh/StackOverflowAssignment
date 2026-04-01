@@ -1,8 +1,9 @@
 package com.example.stackoverflow.data.repositoryimpls
 
 import com.example.stackoverflow.FakeApiService
-import com.example.stackoverflow.data.remote.dtos.UsersResponseDto
 import com.example.stackoverflow.TestHelper
+import com.example.stackoverflow.data.remote.dtos.UsersResponseDto
+import com.example.stackoverflow.fakes.FakeUserDao
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -12,11 +13,12 @@ import retrofit2.Response
 class UserRepositoryImplTest {
 
     @Test
-    fun `getUsers returns mapped users on successful response`() = runBlocking {
+    fun `getUsers persists api data to database then returns users from database`() = runBlocking {
         val api = FakeApiService(
             response = Response.success(TestHelper.usersResponseDto)
         )
-        val repository = UserRepositoryImpl(api)
+        val userDao = FakeUserDao()
+        val repository = UserRepositoryImpl(api, userDao)
 
         val result = repository.getUsers()
 
@@ -26,6 +28,7 @@ class UserRepositoryImplTest {
         assertEquals(TestHelper.USER_IMAGE_URL, result.first().imageUrl)
         assertEquals(TestHelper.USER_REPUTATION, result.first().repo)
         assertTrue(!result.first().isFollowing)
+        assertEquals(1, userDao.getUsers().size)
     }
 
     @Test
@@ -33,8 +36,10 @@ class UserRepositoryImplTest {
         val api = FakeApiService(
             response = Response.success(UsersResponseDto(items = emptyList()))
         )
-        val repository = UserRepositoryImpl(api)
+        val userDao = FakeUserDao()
+        val repository = UserRepositoryImpl(api, userDao)
         val result = repository.getUsers()
         assertTrue(result.isEmpty())
+        assertTrue(userDao.getUsers().isEmpty())
     }
 }

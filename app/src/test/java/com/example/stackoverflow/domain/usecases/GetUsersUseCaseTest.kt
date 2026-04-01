@@ -4,6 +4,7 @@ import com.example.stackoverflow.FakeApiService
 import com.example.stackoverflow.TestHelper
 import com.example.stackoverflow.data.remote.dtos.UsersResponseDto
 import com.example.stackoverflow.data.repositoryimpls.UserRepositoryImpl
+import com.example.stackoverflow.fakes.FakeUserDao
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -15,7 +16,8 @@ class GetUsersUseCaseTest {
     @Test
     fun `invoke returns users from repository`() = runBlocking {
         val repository = UserRepositoryImpl(
-            FakeApiService(Response.success(TestHelper.usersResponseDto))
+            FakeApiService(Response.success(TestHelper.usersResponseDto)),
+            FakeUserDao()
         )
         val getUsersUseCase = GetUsersUseCase(repository)
 
@@ -32,7 +34,8 @@ class GetUsersUseCaseTest {
     @Test
     fun `invoke returns empty list when repository has no users`() = runBlocking {
         val repository = UserRepositoryImpl(
-            FakeApiService(Response.success(UsersResponseDto(items = emptyList())))
+            FakeApiService(Response.success(UsersResponseDto(items = emptyList()))),
+            FakeUserDao()
         )
         val getUsersUseCase = GetUsersUseCase(repository)
 

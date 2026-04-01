@@ -1,5 +1,6 @@
 package com.example.stackoverflow.di
 
+import com.example.stackoverflow.data.local.daos.UserDao
 import com.example.stackoverflow.data.remote.apis.StackOverflowApiService
 import com.example.stackoverflow.data.repositoryimpls.UserRepositoryImpl
 import com.example.stackoverflow.domain.repositories.UserRepository
@@ -15,6 +16,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(apiService: StackOverflowApiService): UserRepository =
-        UserRepositoryImpl(apiService)
+    fun provideUserRepository(
+        apiService: StackOverflowApiService,
+        userDao: UserDao
+    ): UserRepository =
+        UserRepositoryImpl(apiService, userDao)
 }

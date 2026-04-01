@@ -17,11 +17,11 @@ interface UserDao {
     suspend fun getUsers(): List<UserEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUsers(users: List<UserEntity>): List<Long>
+    suspend fun insertUsers(users: List<UserEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user: UserEntity): Long
+    suspend fun insertUser(user: UserEntity)
 
     @Query("DELETE FROM users")
-    suspend fun deleteAll(): Int
+    suspend fun deleteAll()
 }

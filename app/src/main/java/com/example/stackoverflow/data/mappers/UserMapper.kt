@@ -21,3 +21,12 @@ fun UserEntity.toUiModel(): User =
         isFollowing = isFollowing,
         repo = repo
     )
+
+fun User.toEntity(): UserEntity =
+    UserEntity(
+        id = id,
+        name = name,
+        imageUrl = imageUrl,
+        isFollowing = isFollowing,
+        repo = repo
+    )
